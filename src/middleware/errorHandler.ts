@@ -1,13 +1,6 @@
 const { constants } = require('./../constants');
 
-interface ErrorHandlerProps {
-  err: any;
-  req: any;
-  res: any;
-  next: any;
-}
-
-const errorHandler = ({ err, req, res, next }: ErrorHandlerProps) => {
+const errorHandler = (err: any, req: any, res: any, next: any) => {
   const statusCode = res.statusCode ? res.statusCode : 500;
 
   switch (statusCode) {
@@ -50,9 +43,7 @@ const errorHandler = ({ err, req, res, next }: ErrorHandlerProps) => {
       break;
 
     default:
-      res.json({
-        message: 'no error, all good!',
-      });
+      console.log('no error, all good!');
       break;
   }
 };

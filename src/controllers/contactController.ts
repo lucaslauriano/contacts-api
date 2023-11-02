@@ -1,17 +1,12 @@
 const asyncHandler = require('express-async-handler');
 const Contact = require('../models/contactModel');
 
-export type AsyncHandlerProps = {
-  req: any;
-  res: any;
-};
-
-const getContacts = asyncHandler(async ({ req, res }: AsyncHandlerProps) => {
+const getContacts = asyncHandler(async (req: any, res: any) => {
   const contacts = await Contact.find({ user_id: req.user.id });
   res.status(200).json(contacts);
 });
 
-const createContact = asyncHandler(async ({ req, res }: AsyncHandlerProps) => {
+const createContact = asyncHandler(async (req: any, res: any) => {
   const { name, email, phone } = req.body;
   if (!name || !email || !phone) {
     res.status(400);
@@ -27,7 +22,7 @@ const createContact = asyncHandler(async ({ req, res }: AsyncHandlerProps) => {
   res.status(201).json(contact);
 });
 
-const getContact = asyncHandler(async ({ req, res }: AsyncHandlerProps) => {
+const getContact = asyncHandler(async (req: any, res: any) => {
   const contact = await Contact.findById(req.params.id);
   if (!contact) {
     res.status(404);
@@ -37,7 +32,7 @@ const getContact = asyncHandler(async ({ req, res }: AsyncHandlerProps) => {
   res.status(200).json(contact);
 });
 
-const updateContact = asyncHandler(async ({ req, res }: AsyncHandlerProps) => {
+const updateContact = asyncHandler(async (req: any, res: any) => {
   const contact = await Contact.findById(req.params.id);
   if (!contact) {
     res.status(404);
@@ -59,7 +54,7 @@ const updateContact = asyncHandler(async ({ req, res }: AsyncHandlerProps) => {
   });
 });
 
-const deleteContact = asyncHandler(async ({ req, res }: AsyncHandlerProps) => {
+const deleteContact = asyncHandler(async (req: any, res: any) => {
   const contact = await Contact.findById(req.params.id);
   if (!contact) {
     res.status(404);
@@ -84,3 +79,4 @@ module.exports = {
   updateContact,
   deleteContact,
 };
+export {};

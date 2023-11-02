@@ -1,6 +1,5 @@
-import { express } from '../../server';
-
-const contactsRouter = express.Router();
+const express = require('express');
+const router = express.Router();
 const {
   getContacts,
   getContact,
@@ -11,14 +10,11 @@ const {
 
 const contactsValidateToken = require('../middleware/validateTokenHandler');
 
-contactsRouter.use(contactsValidateToken); // validates every routes under this middleware
+router.use(contactsValidateToken);
 
-contactsRouter.route('/').get(getContacts).post(createContact);
+router.route('/').get(getContacts).post(createContact);
 
-contactsRouter
-  .route('/:id')
-  .get(getContact)
-  .put(updateContact)
-  .delete(deleteContact);
+router.route('/:id').get(getContact).put(updateContact).delete(deleteContact);
 
-module.exports = contactsRouter;
+module.exports = router;
+export {};

@@ -1,5 +1,4 @@
-import { express } from '../../server';
-
+const express = require('express');
 const {
   registerUser,
   loginUser,
@@ -7,10 +6,11 @@ const {
 } = require('../controllers/userController');
 const userValidateToken = require('../middleware/validateTokenHandler');
 
-const userRouter = express.Router();
+const router = express.Router();
 
-userRouter.post('/register', registerUser);
-userRouter.post('/login', loginUser);
-userRouter.get('/current', userValidateToken, currentUser);
+router.post('/register', registerUser);
+router.post('/login', loginUser);
+router.get('/current', userValidateToken, currentUser);
 
-module.exports = userRouter;
+module.exports = router;
+export {};
