@@ -50,7 +50,9 @@ const errorHandler = ({ err, req, res, next }: ErrorHandlerProps) => {
       break;
 
     default:
-      console.log('no error, all good!');
+      res.json({
+        message: 'no error, all good!',
+      });
       break;
   }
 };
